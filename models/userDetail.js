@@ -18,6 +18,13 @@ const userDetailsSchema = new mongoose.Schema(
     weight: Number,
     height: Number,
     profile: String,
+    beforefrbody: String,
+    beforebabody: String,
+    afterfrbody: String,
+    afterbabody: String,
+    program: String,
+    coach: String,
+    coachImg: String,
   },
 
   { collection: "userInfo" },
