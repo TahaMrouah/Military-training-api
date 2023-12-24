@@ -8,8 +8,8 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-    user: process.env.EMAIL || "REPLACE-WITH-YOUR-ALIAS@YOURDOMAIN.COM",
-    pass: process.env.PASSWORD || "REPLACE-WITH-YOUR-GENERATED-PASSWORD",
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD,
   },
 });
 let MailGenerator = new Mailgen({
