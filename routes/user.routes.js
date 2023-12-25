@@ -2,7 +2,7 @@ import express from "express";
 import * as controller from "../controllers/userController.js";
 import Auth, { localVariables } from "../middleware/auth.js";
 import { registerMail } from "../controllers/mailer.js";
-import path from "path";
+//import path from "path";
 const router = express.Router();
 //POST
 router.route("/register").post(controller.register); //registerUser
@@ -18,11 +18,12 @@ router
   .get(controller.verifyUser, localVariables, controller.generateOTP); //gen otp
 router.route("/verifyOTP").get(controller.verifyUser, controller.verifyOTP); //verify otp
 router.route("/createResetSession").get(controller.createResetSession); //reset all
-
+router.route("/allUsers").get(controller.getUsers); // get all users
 //Put
 router.route("/updateUser").put(Auth, controller.updateUser); //update profile
 router
   .route("/resetPassword")
   .put(controller.verifyUser, controller.resetPassword); // reset password
-
+//delete
+router.route(`/user/:id`).delete(controller.deleteUserById);
 export default router;

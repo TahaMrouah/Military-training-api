@@ -53,6 +53,7 @@ const register = async (req, res) => {
       afterbabody,
       coach,
       coachImg,
+      role,
     } = req.body;
 
     // Checking if username already exists
@@ -91,6 +92,7 @@ const register = async (req, res) => {
       afterfrbody: afterfrbody || " ",
       afterbabody: afterbabody || " ",
       coachImg,
+      role,
     });
 
     // Saving the user to the database
@@ -148,7 +150,7 @@ const loginUser = async (req, res) => {
       { userId: user._id, username: user.username },
       process.env.JWT_TOKEN,
       {
-        expiresIn: "24h",
+        expiresIn: "12h",
       }
     );
 
@@ -164,7 +166,38 @@ const loginUser = async (req, res) => {
       .send({ error: error.message || "Internal Server Error" });
   }
 };
+/** delete user */
+const deleteUserById = async (req, res) => {
+  const userId = req.params.id;
 
+  try {
+    // Check if the user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ status: 404, error: "User not found" });
+    }
+
+    // Implement any additional authorization checks here (e.g., check user roles, permissions)
+
+    // Delete the user
+    await User.findByIdAndDelete(userId);
+
+    res.status(200).json({ status: 200, message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res.status(500).json({ status: 500, error: "Internal Server Error" });
+  }
+};
+/** get all users */
+const getUsers = async (req, res) => {
+  try {
+    const allUsers = await User.find({});
+    res.status(200).json({ status: 200, data: allUsers });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ status: 500, error: "Internal Server Error" });
+  }
+};
 /**Update user profile */
 const updateUser = async (req, res) => {
   try {
@@ -264,4 +297,6 @@ export {
   createResetSession,
   resetPassword,
   verifyUser,
+  getUsers,
+  deleteUserById,
 };

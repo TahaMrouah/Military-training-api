@@ -25,6 +25,7 @@ const userDetailsSchema = new mongoose.Schema(
     program: String,
     coach: String,
     coachImg: String,
+    role: String,
   },
 
   { collection: "userInfo" },
