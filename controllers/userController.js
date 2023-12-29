@@ -37,7 +37,7 @@ const register = async (req, res) => {
       username,
       name,
       lname,
-      number,
+      mobile,
       email,
       password,
       address,
@@ -47,13 +47,12 @@ const register = async (req, res) => {
       height,
       profile,
       program,
-      beforefrbody,
-      beforebabody,
-      afterfrbody,
-      afterbabody,
+      beforeimg,
+      afterimg,
       coach,
       coachImg,
       role,
+      plan,
     } = req.body;
 
     // Checking if username already exists
@@ -79,7 +78,7 @@ const register = async (req, res) => {
       email,
       password: encryptedPassword,
       address,
-      number,
+      mobile,
       city,
       service,
       weight,
@@ -87,12 +86,11 @@ const register = async (req, res) => {
       program,
       coach,
       profile: profile || " ",
-      beforefrbody: beforefrbody || " ",
-      beforebabody: beforebabody || " ",
-      afterfrbody: afterfrbody || " ",
-      afterbabody: afterbabody || " ",
+      beforeimg: beforeimg || "",
+      afterimg: afterimg || "",
       coachImg,
       role,
+      plan,
     });
 
     // Saving the user to the database
